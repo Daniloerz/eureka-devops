@@ -6,13 +6,10 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
-  env:
-    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
 jobs:
   build:
     name: Build and analyze
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-lates
     steps:
       - uses: actions/checkout@v3
         with:
