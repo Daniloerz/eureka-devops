@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  eureka:
+    image: 687633921893.dkr.ecr.us-east-1.amazonaws.com/eureka
+    container_name: eureka-container
+    expose:
+      - 8761
+    ports:
+      - 8761:8761
+
+  twilio:
+    depends_on:
+      - eureka
+    image: 687633921893.dkr.ecr.us-east-1.amazonaws.com/twilio
+    container_name: twilio-container
+    expose:
+      - 8084
+    ports:
+      - 8084:8084
+    environment:
+      ACCOUNT_SID: ${ACCOUNT_SID}
+      AUTH_TOKEN: ${AUTH_TOKEN}
+      FROM_NUMBER: ${FROM_NUMBER}
+      eureka.client.serviceUrl.defaultZone: ${EUREKA_DEFAULTZONE}
+      server.port: 8084
+    links:
+      - eureka
