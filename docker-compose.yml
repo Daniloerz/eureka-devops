@@ -12,7 +12,7 @@ services:
   twilio:
     depends_on:
       - eureka
-    image: 687633921893.dkr.ecr.us-east-1.amazonaws.com/twilio:latest
+    image: 687633921893.dkr.ecr.us-east-1.amazonaws.com/twilio-devops:latest
     container_name: twilio-container
     expose:
       - 8084
