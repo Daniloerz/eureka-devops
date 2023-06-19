@@ -2,7 +2,7 @@ version: '3'
 
 services:
   eureka:
-    image: 687633921893.dkr.ecr.us-east-1.amazonaws.com/eureka
+    image: 687633921893.dkr.ecr.us-east-1.amazonaws.com/eureka-devops:latest
     container_name: eureka-container
     expose:
       - 8761
@@ -12,7 +12,7 @@ services:
   twilio:
     depends_on:
       - eureka
-    image: 687633921893.dkr.ecr.us-east-1.amazonaws.com/twilio
+    image: 687633921893.dkr.ecr.us-east-1.amazonaws.com/twilio:latest
     container_name: twilio-container
     expose:
       - 8084
