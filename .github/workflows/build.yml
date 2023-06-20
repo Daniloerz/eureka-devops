@@ -7,6 +7,18 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
+  post-to-google-chat:
+    needs: [ build, deploy-ecr, deploy-eb ]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: google-chat-job-failed
+        uses: datamole-ai/google-chat-job-failed@main
+
+        with:
+          gchatURL: ${{ secrets.GOOGLE_CHAT_WEBHOOK }}
+          json: ${{ toJSON(needs) }}
+
   build:
     name: Build and analyze
     runs-on: ubuntu-latest
@@ -100,4 +112,3 @@ jobs:
           version_label: v.10
           region: ${{ secrets.AWS_REGION }}
           deployment_package: deploy.zip
-
